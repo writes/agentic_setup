@@ -1,0 +1,33 @@
+# Agentic Setup Framework (Completely User-Specific)
+# ========================================================
+# NOTHING from the agentic setup framework should be in version control.
+# This is a personal development tool - each developer installs it separately.
+#
+# Why user-specific?
+# - Each developer may want different agents enabled
+# - Agent sensitivity settings may vary by developer preference
+# - Allows experimentation without affecting the team
+# - No version control conflicts or noise
+#
+# Installation:
+# 1. Clone the framework separately:
+#    git clone https://github.com/yourorg/agentic-setup ~/agentic-setup
+#
+# 2. Run installer in your project:
+#    cd your-project
+#    python ~/agentic-setup/scripts/implement_framework.py .
+#
+# Learn more: https://github.com/yourorg/agentic-setup
+
+# The framework directory itself (in case someone copies it here)
+agentic_setup/
+
+# Agent configuration directory
+.claude/
+
+# Claude configuration file
+CLAUDE.md
+CLAUDE.md.backup.*
+
+# Installation reports
+INSTALLATION_REPORT_*.md
