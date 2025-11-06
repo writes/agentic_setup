@@ -17,6 +17,17 @@ A universal framework that:
 - **Integrates with Claude Code** for AI-powered reviews
 - **Works with any codebase** - Python, TypeScript, Go, Ruby, etc.
 
+### 🔐 Privacy First: Nothing Shared
+
+**This is a personal development tool:**
+- ❌ **Not committed** to your project repos
+- ❌ **Not shared** with teammates via git
+- ✅ **Installed locally** on each developer's machine
+- ✅ **Configured personally** - your agents, your settings
+- ✅ **Completely optional** - use it or don't, zero impact on team
+
+Think of it like your personal linter, formatter, or IDE settings - it's yours alone.
+
 ## ✨ Key Features
 
 ### 🔍 Auto-Detection
@@ -55,17 +66,37 @@ Built-in support for specialized Claude Code agents:
 
 ## 🚀 Quick Start
 
-### 1. Install Framework
+### 1. Install Framework (One-Time Setup)
 ```bash
-# Copy to your project
-cp -r agentic_setup /path/to/your/project/
+# Clone the framework to your home directory (or anywhere you prefer)
+git clone https://github.com/yourorg/agentic-setup ~/agentic-setup
 
-# Run installer (auto-detects your stack)
-cd /path/to/your/project
-python agentic_setup/scripts/implement_framework.py .
+# Or download and extract:
+# curl -L https://github.com/yourorg/agentic-setup/archive/main.zip -o agentic-setup.zip
+# unzip agentic-setup.zip -d ~/
 ```
 
-### 2. Review Detection Results
+### 2. Use in Any Project
+```bash
+# Navigate to your project
+cd /path/to/your/project
+
+# Run installer (auto-detects your stack)
+python ~/agentic-setup/scripts/implement_framework.py .
+
+# Generated files (.claude/, CLAUDE.md) are automatically added to .gitignore
+```
+
+> **💡 Completely User-Specific:** The agentic framework is a **personal development tool**. Nothing gets committed to your project repos. Each developer installs it separately on their machine with their own preferences.
+
+**Why nothing shared?**
+- ✅ Zero git noise - framework and configs stay local
+- ✅ Personal choice - use it or don't, no team coordination needed
+- ✅ Experiment freely - try different agents without affecting anyone
+- ✅ No conflicts - everyone has their own setup
+- ✅ Clean repos - project repos contain only project code
+
+### 3. Review Detection Results
 The installer will:
 - Scan your codebase
 - Show detected languages, frameworks, patterns
@@ -101,7 +132,7 @@ Example output:
        → Detected frontend/UI project
 ```
 
-### 3. Start Using
+### 4. Start Using
 ```bash
 # Make a change
 git add .
@@ -122,11 +153,13 @@ Checking doc-agent... ✅ APPROVED
 
 ---
 
-## 📦 What Gets Installed
+## 📦 What Gets Installed (Locally, Not in Git)
+
+The installer creates these files in your project, **all automatically ignored by git**:
 
 ```
 your-project/
-├── .claude/
+├── .claude/                 # ❌ Not in git (in .gitignore)
 │   ├── agents/              # Agent configurations
 │   ├── skills/              # Agent skills (auto-generated based on detection)
 │   │   ├── data-agent/
@@ -142,13 +175,15 @@ your-project/
 │   │   └── agent_metrics.py
 │   ├── metrics/             # Performance tracking
 │   └── config.py            # Main configuration
-├── .git/hooks/
+├── .git/hooks/              # ❌ Not in git (git ignores hooks by default)
 │   ├── pre-commit           # Runs agents before commit
 │   └── post-commit          # Records metrics
-├── .github/copilot/
-│   └── config.yml           # GitHub Copilot integration
-└── CLAUDE.md                # Claude Code configuration
+├── .gitignore               # ✅ Updated to exclude agentic files
+├── CLAUDE.md                # ❌ Not in git (in .gitignore)
+└── INSTALLATION_REPORT_*.md # ❌ Not in git (in .gitignore)
 ```
+
+**Everything stays local** - your project repo remains clean!
 
 ---
 
@@ -357,6 +392,67 @@ Top Veto Reasons:
 
 ---
 
+## 👥 Team Usage
+
+### Individual Installation (Nothing Shared)
+
+The agentic framework is a **personal development tool** - completely separate from your project repos.
+
+```bash
+# 1. Each developer installs the framework once on their machine
+git clone https://github.com/yourorg/agentic-setup ~/agentic-setup
+
+# 2. Clone your project (no agentic stuff in it!)
+git clone your-project-repo
+cd your-project
+
+# 3. Run the installer to set up agents for THIS project
+python ~/agentic-setup/scripts/implement_framework.py .
+
+# 4. Work normally - .claude/ and CLAUDE.md are in .gitignore
+git status  # No agentic files show up!
+```
+
+### Team Coordination (Optional)
+
+Since nothing is shared in git, teams can coordinate through other channels:
+
+1. **Document in team wiki or Notion:**
+   ```markdown
+   ## Recommended Dev Tools
+
+   ### Agentic Setup (Optional)
+   Some team members use the agentic framework for code quality:
+   https://github.com/yourorg/agentic-setup
+
+   Suggested agents for our codebase:
+   - All 6 default agents
+   - Performance Agent (we have backend APIs)
+   ```
+
+2. **Share knowledge verbally:**
+   - "Hey, I'm using the Performance Agent and it's caught 3 issues!"
+   - "The Security Agent found hardcoded secrets in my code"
+   - Team members can adopt it if interested
+
+3. **No pressure:**
+   - Framework is completely optional
+   - Some devs use it, some don't
+   - Zero impact on the codebase
+
+### Benefits of Nothing Shared
+
+| Benefit | Description |
+|---------|-------------|
+| **Zero Git Noise** | No framework files, configs, or changes in git |
+| **Personal Choice** | Use it or don't - no team coordination needed |
+| **No Conflicts** | Impossible to have merge conflicts |
+| **Experimentation** | Try any agents without affecting anyone |
+| **Clean Repos** | Project repos contain ONLY project code |
+| **Easy Adoption** | Devs can start/stop using it anytime |
+
+---
+
 ## 🤝 Integration Examples
 
 ### Python + Flask + PostgreSQL
@@ -394,7 +490,7 @@ Top Veto Reasons:
 
 ## 🔍 How Detection Works
 
-The framework scans for:
+The framework scans your project **locally** (nothing sent anywhere):
 
 1. **Programming Languages**
    - File extensions (.py, .js, .ts, .rb, .go, etc.)
@@ -416,6 +512,8 @@ The framework scans for:
 
 Based on these signals, it enables appropriate agents automatically.
 
+**All analysis happens locally** - your code never leaves your machine.
+
 ---
 
 ## 🎯 Best Practices
@@ -425,6 +523,75 @@ Based on these signals, it enables appropriate agents automatically.
 3. **Review Metrics** - Check agent decisions weekly
 4. **Tune Standards** - Adjust thresholds to your team
 5. **Iterate** - Add/remove agents as project evolves
+
+---
+
+## ❓ FAQ
+
+### Q: Why isn't the framework committed to my project repo?
+
+**A:** This is a **personal development tool**, like your IDE or linter settings. Each developer:
+- Installs it once: `~/agentic-setup`
+- Uses it in any project: `python ~/agentic-setup/scripts/implement_framework.py .`
+- Keeps configs local: `.claude/` is in `.gitignore`
+
+Benefits:
+- ✅ No git noise or conflicts
+- ✅ Personal choice - use it or don't
+- ✅ Experiment freely without affecting teammates
+- ✅ Clean project repos
+
+### Q: How do team members coordinate?
+
+**A:** They don't have to! It's optional and personal. If you want to share knowledge:
+- Document in wiki: "Some devs use agentic-setup, here's the link"
+- Share verbally: "The Security Agent caught 3 bugs for me!"
+- No pressure: Everyone chooses their own tools
+
+### Q: What if I want to uninstall?
+
+**A:** Just delete the local files:
+```bash
+rm -rf .claude/ CLAUDE.md .git/hooks/pre-commit .git/hooks/post-commit
+```
+
+Your project repo was never affected - nothing to commit!
+
+### Q: Can I use different agents in different projects?
+
+**A:** Yes! Each project gets its own `.claude/` configuration:
+```bash
+cd project-a
+python ~/agentic-setup/scripts/implement_framework.py .
+# Choose agents for project A
+
+cd ../project-b
+python ~/agentic-setup/scripts/implement_framework.py .
+# Choose different agents for project B
+```
+
+### Q: Is my code sent anywhere?
+
+**A:** No. Everything runs locally:
+- Detection scans your local files
+- Agents run on your machine
+- No external API calls (except Claude Code if you use it)
+- Your code never leaves your computer
+
+### Q: What's in git vs. what's local?
+
+**In Git (Project Repo):**
+- ✅ Your project code
+- ✅ Updated `.gitignore` (excludes agentic files)
+- ❌ No agentic framework
+- ❌ No agent configs
+- ❌ No `.claude/` directory
+
+**Local Only (Your Machine):**
+- ✅ `~/agentic-setup/` - The framework
+- ✅ `.claude/` - Agent configs (per project)
+- ✅ `CLAUDE.md` - Claude settings (per project)
+- ✅ Git hooks (per project)
 
 ---
 
@@ -528,6 +695,57 @@ Inspired by:
 
 ---
 
+## 📝 Summary: What's Shared, What's Not
+
+### ✅ Shared in This Repo (agentic-setup)
+This repository contains the **framework itself**:
+- Detection scripts
+- Installer
+- Agent templates
+- Documentation
+
+Developers clone **this repo** once to their machine.
+
+### ❌ NOT Shared in Project Repos
+When you use this framework in your projects, **nothing** gets committed:
+- ❌ No `agentic_setup/` directory
+- ❌ No `.claude/` directory
+- ❌ No `CLAUDE.md` file
+- ❌ No agent configs
+
+Only `.gitignore` is updated (with entries to exclude agentic files).
+
+### 🎯 The Model
+
+```
+┌─────────────────────────────────────────────┐
+│ This Repo: github.com/you/agentic-setup     │
+│ (Framework - Clone Once)                     │
+└────────────────┬────────────────────────────┘
+                 │
+                 │ Each dev clones to ~/agentic-setup
+                 │
+        ┌────────▼─────────┬─────────────┬──────────────┐
+        │                  │             │              │
+        │ Project A        │ Project B   │ Project C    │
+        │ (No agentic      │ (No agentic │ (No agentic  │
+        │  files in git)   │  in git)    │  in git)     │
+        │                  │             │              │
+        │ Local only:      │ Local only: │ Local only:  │
+        │ .claude/         │ .claude/    │ .claude/     │
+        │ CLAUDE.md        │ CLAUDE.md   │ CLAUDE.md    │
+        └──────────────────┴─────────────┴──────────────┘
+```
+
+### 🚀 Workflow
+
+1. **Install framework once:** `git clone https://github.com/you/agentic-setup ~/agentic-setup`
+2. **Use in any project:** `cd project && python ~/agentic-setup/scripts/implement_framework.py .`
+3. **Local files created:** `.claude/`, `CLAUDE.md` (automatically in `.gitignore`)
+4. **Project repos stay clean:** No agentic files committed, ever!
+
+---
+
 **Made with ❤️ for developers who care about code quality**
 
-*Transform any codebase into a self-validating, high-quality system in minutes.*
+*A personal development tool that transforms how you write code - without changing your repos.*

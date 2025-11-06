@@ -57,6 +57,7 @@ class MultiAgentFrameworkInstaller:
             ("Generating Claude configuration", self.create_claude_config),
             ("Setting up GitHub Copilot", self.setup_github_copilot),
             ("Creating helper scripts", self.create_helper_scripts),
+            ("Updating .gitignore", self.update_gitignore),
             ("Running initial tests", self.run_tests),
             ("Generating documentation", self.generate_documentation)
         ]
@@ -922,6 +923,45 @@ if __name__ == "__main__":
 
         (scripts_dir / "test_system.py").write_text(test_script)
         (scripts_dir / "test_system.py").chmod(0o755)
+
+    def update_gitignore(self):
+        """Add agentic setup entries to .gitignore."""
+        gitignore_path = self.repo_path / ".gitignore"
+
+        # Read the template
+        template_path = Path(__file__).parent.parent / "templates/gitignore_template.txt"
+        if not template_path.exists():
+            print("   ⚠️  Warning: gitignore template not found")
+            return
+
+        with open(template_path) as f:
+            gitignore_entries = f.read()
+
+        # Check if .gitignore exists
+        if gitignore_path.exists():
+            with open(gitignore_path) as f:
+                existing_content = f.read()
+
+            # Check if entries already exist
+            if ".claude/" in existing_content or "# Agentic Setup Framework" in existing_content:
+                print("   ℹ️  .gitignore already contains agentic setup entries")
+                return
+
+            # Append to existing .gitignore
+            with open(gitignore_path, 'a') as f:
+                f.write("\n\n")
+                f.write(gitignore_entries)
+
+            print("   ✅ Added agentic setup entries to existing .gitignore")
+        else:
+            # Create new .gitignore
+            with open(gitignore_path, 'w') as f:
+                f.write(gitignore_entries)
+
+            print("   ✅ Created .gitignore with agentic setup entries")
+
+        print("   💡 Reminder: Agentic setup files (.claude/, CLAUDE.md) are user-specific")
+        print("      Each team member should run the installer separately")
 
     def run_tests(self):
         """Run initial system tests."""

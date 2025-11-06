@@ -10,23 +10,49 @@
 
 ## 📋 Quick Start
 
-Install the complete multi-agent system in any repository:
+### One-Time Installation
+
+Install the framework once on your machine:
 
 ```bash
-# Clone or copy this directory to your project
-cp -r agentic_setup /path/to/your/project/
+# Clone to your home directory (or anywhere you prefer)
+git clone https://github.com/yourorg/agentic-setup ~/agentic-setup
+
+# Or download:
+curl -L https://github.com/yourorg/agentic-setup/archive/main.zip -o agentic-setup.zip
+unzip agentic-setup.zip -d ~/
+```
+
+### Use in Any Project
+
+Run the installer in any project:
+
+```bash
+# Navigate to your project
+cd /path/to/your/project
 
 # Run the installer (auto-detects your stack)
-cd /path/to/your/project
-python agentic_setup/scripts/implement_framework.py .
+python ~/agentic-setup/scripts/implement_framework.py .
 
 # Test the system
 python .claude/scripts/test_system.py
 
 # Make your first validated commit
 git add .
-git commit -m "Initialize multi-agent system"
+git commit -m "Add new feature"  # Agents run automatically!
 ```
+
+### 🔒 Completely User-Specific
+
+**Important:** This framework is a **personal development tool** - nothing gets committed.
+
+- ✅ Framework stays in `~/agentic-setup` (or wherever you cloned it)
+- ✅ Generated files (`.claude/`, `CLAUDE.md`) are automatically added to `.gitignore`
+- ✅ Each team member installs separately with their own preferences
+- ✅ Zero git noise - project repos contain only project code
+- ✅ Optional tool - use it or don't, no coordination needed
+
+**For teams:** Nothing is shared in git. Developers can coordinate via wiki/docs if desired, but the framework is completely optional and personal.
 
 ---
 
