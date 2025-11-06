@@ -1,0 +1,399 @@
+# GitHub Copilot Configuration for Multi-Agent System
+# Place this file at: .github/copilot/config.yml
+
+version: 1
+
+# Agent-aware code generation
+agents:
+  enabled: true
+  enforce_standards: true
+
+  # Map code areas to responsible agents
+  ownership:
+    - agent: "Data Agent"
+      paths:
+        - "scripts/data/**"
+        - "scripts/pipeline/**"
+        - "**/etl/**"
+        - "**/*_loader.py"
+        - "**/*_validator.py"
+      standards:
+        - "Include data validation"
+        - "Handle missing data gracefully"
+        - "Use bulk operations for performance"
+        - "Add logging for data quality"
+
+    - agent: "Math Agent"
+      paths:
+        - "scripts/math/**"
+        - "**/calculations/**"
+        - "**/*_formula.py"
+        - "**/*_stats.py"
+      standards:
+        - "Use safe division (no divide by zero)"
+        - "Include unit tests with edge cases"
+        - "Document formula sources"
+        - "Use numpy for vectorization"
+
+    - agent: "Model Agent"
+      paths:
+        - "models/**"
+        - "scripts/ml/**"
+        - "**/*_model.py"
+        - "**/*_predictor.py"
+      standards:
+        - "Include train/test split"
+        - "Add cross-validation"
+        - "Document feature importance"
+        - "Track model metrics"
+
+    - agent: "Trading Agent"
+      paths:
+        - "scripts/trading/**"
+        - "scripts/strategy/**"
+        - "**/*_signal.py"
+        - "**/*_executor.py"
+      standards:
+        - "Include risk checks"
+        - "Validate entry conditions"
+        - "Add position sizing logic"
+        - "Handle order failures"
+
+    - agent: "Review Agent"
+      paths:
+        - "tests/**"
+        - "**/*_test.py"
+        - ".github/**"
+      standards:
+        - "Aim for >80% coverage"
+        - "Test edge cases"
+        - "Include integration tests"
+        - "Mock external dependencies"
+
+    - agent: "Infrastructure Agent"
+      paths:
+        - "aws/**"
+        - "deploy/**"
+        - "infrastructure/**"
+        - "**/*_lambda.py"
+      standards:
+        - "Include error handling"
+        - "Add CloudWatch logging"
+        - "Use environment variables"
+        - "Implement retries"
+
+    - agent: "Documentation Agent"
+      paths:
+        - "docs/**"
+        - "*.md"
+        - "**/README.md"
+      standards:
+        - "Keep documentation current"
+        - "Include examples"
+        - "No placeholder content"
+        - "Add timestamps"
+
+    - agent: "Code Organization Agent"
+      paths:
+        - ".claude/**"
+        - "**/refactor_*.py"
+        - "scripts/tools/**"
+      standards:
+        - "Keep functions under 50 lines"
+        - "Avoid duplication"
+        - "Clear module boundaries"
+        - "Follow naming conventions"
+
+# Code generation settings
+generation:
+  # Maximum lines per suggestion
+  max_lines: 10
+
+  # Include these in every file
+  always_include:
+    - type_hints: true
+    - docstrings: true
+    - error_handling: true
+    - logging: false  # Only where appropriate
+
+  # Language-specific settings
+  python:
+    style: "black"
+    max_line_length: 88
+    quotes: "double"
+    imports:
+      order:
+        - "standard"
+        - "third_party"
+        - "local"
+      avoid:
+        - "from x import *"
+        - "import sys, os"  # One per line
+
+  # Patterns to follow
+  patterns:
+    - name: "Type hints for all functions"
+      example: |
+        def calculate_average(values: List[float]) -> float:
+            """Calculate arithmetic average."""
+            return sum(values) / len(values)
+
+    - name: "Comprehensive docstrings"
+      example: |
+        def process_data(data: pd.DataFrame) -> pd.DataFrame:
+            """
+            Process raw data for analysis.
+
+            Args:
+                data: Raw input data
+
+            Returns:
+                Processed DataFrame ready for analysis
+
+            Raises:
+                ValueError: If data is empty
+
+            Examples:
+                >>> df = pd.DataFrame({'value': [1, 2, 3]})
+                >>> result = process_data(df)
+            """
+
+    - name: "Error handling"
+      example: |
+        try:
+            result = risky_operation()
+        except SpecificError as e:
+            logger.error(f"Operation failed: {e}")
+            return default_value
+        except Exception as e:
+            logger.exception(f"Unexpected error: {e}")
+            raise
+
+    - name: "Clear variable names"
+      avoid:
+        - "x, y, z"  # Unless coordinates
+        - "data"  # Too generic
+        - "temp"  # Be specific
+      prefer:
+        - "user_input"
+        - "price_history"
+        - "validation_result"
+
+# Quality checks
+quality:
+  # Enforce these checks
+  enforce:
+    - test_coverage: 80  # Minimum percentage
+    - complexity: 10      # Maximum cyclomatic complexity
+    - line_length: 100    # Maximum line length
+    - function_length: 50 # Maximum lines per function
+    - file_length: 500    # Maximum lines per file
+
+  # Warn about these
+  warnings:
+    - todo_comments: true
+    - fixme_comments: true
+    - hardcoded_values: true
+    - print_statements: true  # Use logging instead
+
+# Suggestions behavior
+suggestions:
+  # How to handle completions
+  behavior:
+    # Complete current line vs multi-line
+    mode: "conservative"  # or "aggressive"
+
+    # Confidence threshold (0-1)
+    confidence_threshold: 0.7
+
+    # Debounce delay in ms
+    debounce_delay: 300
+
+  # Context awareness
+  context:
+    # Look at surrounding code
+    lines_before: 50
+    lines_after: 20
+
+    # Consider other files
+    include_imports: true
+    include_tests: true
+    include_docs: true
+
+# Security
+security:
+  # Block these patterns
+  block:
+    - hardcoded_passwords: true
+    - api_keys_in_code: true
+    - sql_injection_risk: true
+    - command_injection_risk: true
+    - path_traversal_risk: true
+
+  # Warn about these
+  warn:
+    - weak_random: true
+    - insecure_deserialization: true
+    - xml_vulnerabilities: true
+
+# Testing
+testing:
+  # Suggest tests for new functions
+  auto_suggest_tests: true
+
+  # Test naming convention
+  naming_pattern: "test_{function_name}"
+
+  # Test structure
+  template: |
+    def test_{function_name}():
+        """Test {function_name} functionality."""
+        # Arrange
+        input_data = ...
+
+        # Act
+        result = {function_name}(input_data)
+
+        # Assert
+        assert result == expected_value
+
+    def test_{function_name}_edge_case():
+        """Test {function_name} with edge cases."""
+        with pytest.raises(ValueError):
+            {function_name}(invalid_input)
+
+# Performance
+performance:
+  # Warn about these
+  warnings:
+    - nested_loops: true  # O(n²) complexity
+    - multiple_db_calls: true
+    - large_memory_allocation: true
+    - synchronous_io_in_async: true
+
+  # Suggest optimizations
+  suggest:
+    - use_generators: true
+    - batch_operations: true
+    - caching: true
+    - connection_pooling: true
+
+# Documentation
+documentation:
+  # Enforce documentation for
+  require:
+    - public_functions: true
+    - public_classes: true
+    - public_modules: true
+    - complex_logic: true  # Complexity > 5
+
+  # Documentation style
+  style: "google"  # or "numpy", "sphinx"
+
+  # Include in docstrings
+  include:
+    - description: true
+    - parameters: true
+    - returns: true
+    - raises: true
+    - examples: true
+
+# Custom snippets for multi-agent system
+snippets:
+  - trigger: "agent_validate"
+    description: "Agent validation check"
+    body: |
+      def validate_with_${1:agent}_agent(code):
+          """Validate code with ${1:agent} agent."""
+          agent = ${1:agent}Agent()
+          result = agent.validate(code)
+
+          if result["status"] == "VETO":
+              raise AgentVetoError(
+                  f"${1:agent} agent vetoed: {result['reason']}"
+              )
+
+          return result
+
+  - trigger: "consensus_check"
+    description: "Multi-agent consensus"
+    body: |
+      def get_consensus(implementation):
+          """Get consensus from all agents."""
+          agents = [
+              DataAgent(), MathAgent(), ModelAgent(),
+              TradingAgent(), ReviewAgent(),
+              InfrastructureAgent(), DocumentationAgent(),
+              CodeOrganizationAgent()
+          ]
+
+          results = {}
+          for agent in agents:
+              results[agent.name] = agent.validate(implementation)
+
+          vetoes = [
+              r for r in results.values()
+              if r["status"] == "VETO"
+          ]
+
+          if vetoes:
+              return {"consensus": False, "vetoes": vetoes}
+
+          return {"consensus": True, "results": results}
+
+  - trigger: "safe_div"
+    description: "Safe division helper"
+    body: |
+      def safe_divide(
+          numerator: float,
+          denominator: float,
+          default: float = 0.0
+      ) -> float:
+          """Safely divide with zero check."""
+          if denominator == 0:
+              logger.warning(
+                  f"Division by zero: {numerator} / {denominator}"
+              )
+              return default
+          return numerator / denominator
+
+# Telemetry
+telemetry:
+  # What to track
+  track:
+    - suggestion_acceptance_rate: true
+    - common_patterns: true
+    - error_frequency: true
+
+  # What to exclude
+  exclude:
+    - file_contents: true
+    - sensitive_data: true
+    - api_keys: true
+
+# Experimental features
+experimental:
+  # Enable experimental features
+  enable:
+    - ai_code_review: false
+    - auto_refactoring: false
+    - test_generation: true
+    - documentation_generation: true
+
+# Environment-specific settings
+environments:
+  development:
+    relaxed_standards: true
+    allow_todos: true
+    allow_print: true
+
+  staging:
+    relaxed_standards: false
+    allow_todos: true
+    allow_print: false
+
+  production:
+    relaxed_standards: false
+    allow_todos: false
+    allow_print: false
+    enforce_all_standards: true
