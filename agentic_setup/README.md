@@ -1,27 +1,14 @@
-# 🤖 Multi-Agent Consensus Framework Setup
+# 🤖 Universal Multi-Agent Framework
 
-## Complete Implementation Guide for Compound Engineering & Superpowers
+## Automated Agent Detection & Consensus System
 
-**Version:** 2.0
-**Date:** November 6, 2025
-**Framework:** 8-Agent Unanimous Consensus System
-
----
-
-## 📋 Table of Contents
-
-- [Quick Start](#quick-start)
-- [What This Is](#what-this-is)
-- [System Architecture](#system-architecture)
-- [Installation](#installation)
-- [Agent Descriptions](#agent-descriptions)
-- [Usage](#usage)
-- [Customization](#customization)
-- [Troubleshooting](#troubleshooting)
+**Version:** 3.0
+**Framework:** Compound Engineering + Superpowers
+**Compatible:** Any codebase, any tech stack
 
 ---
 
-## 🚀 Quick Start
+## 📋 Quick Start
 
 Install the complete multi-agent system in any repository:
 
@@ -29,7 +16,7 @@ Install the complete multi-agent system in any repository:
 # Clone or copy this directory to your project
 cp -r agentic_setup /path/to/your/project/
 
-# Run the installer
+# Run the installer (auto-detects your stack)
 cd /path/to/your/project
 python agentic_setup/scripts/implement_framework.py .
 
@@ -45,24 +32,70 @@ git commit -m "Initialize multi-agent system"
 
 ## 🎯 What This Is
 
-A complete framework for implementing an 8-agent consensus system that ensures:
+A universal framework that automatically detects your project's tech stack and instantiates the right agents to ensure:
 
 - **Code Quality:** Every change validated by domain experts
-- **Zero Defects:** Security, math, data integrity all verified
+- **Zero Defects:** Security, logic, data integrity all verified
 - **Minimal Impact:** Changes kept small and focused
 - **Documentation:** Always current, never stale
 - **Standards:** Enforced consistently across codebase
 
-### The 8 Agents
+### Auto-Detection
 
-1. **Data Agent** - Data pipelines and quality
-2. **Math Agent** - Calculations and formulas
-3. **Model Agent** - ML models and predictions
-4. **Trading Agent** - Business logic and strategies
-5. **Review Agent** - Code quality and security
-6. **Infrastructure Agent** - Deployment and AWS
-7. **Documentation Agent** - Docs and knowledge
-8. **Code Organization Agent** - Structure and cleanliness
+The framework scans your codebase and automatically enables relevant agents based on:
+- Programming languages detected
+- Frameworks and libraries used
+- Project type (web, API, ML, data pipeline, etc.)
+- Existing tooling and patterns
+
+---
+
+## 🤖 Default Agents (Always Enabled)
+
+These agents apply to ANY codebase:
+
+| Agent | Core Role | Triggers | Veto Condition |
+|-------|-----------|----------|----------------|
+| **Data Agent** | Validates inputs, file formats, API schemas | `.csv`, `.json`, `.env`, migrations | Corrupt or missing input data |
+| **Logic Agent** | Ensures core logic correctness and flow | `.ts`, `.py`, `.js`, `.go` | Failing tests or invalid logic |
+| **Test Agent** | Enforces test coverage and regression control | `/tests/`, `.spec.*`, `.test.*` | Coverage < 80%, or missing cases |
+| **Security Agent** | Scans for secrets, injections, vulnerable deps | All code changes | Found secret or high CVE |
+| **Infra Agent** | Checks build, containers, and CI/CD safety | `.yaml`, `.tf`, `Dockerfile` | Unsafe permissions or violations |
+| **Doc Agent** | Verifies docs and README sync with code | `README`, `/docs`, `.md` | Missing or outdated docs |
+
+---
+
+## 🔧 Optional Agents
+
+These agents are enabled automatically when relevant patterns are detected:
+
+### Core Optional Agents
+
+| Agent | Purpose | Auto-Enabled When | Veto Triggers |
+|-------|---------|-------------------|---------------|
+| **Performance Agent** | Runtime efficiency, profiling, algorithmic complexity | APIs, backend services, data pipelines detected | CPU >80%, memory >75%, latency >300ms |
+| **Refactor Agent** | Code structure and maintainability | Mature repos with tech debt | Maintainability index <85 |
+| **Observability Agent** | Logging, tracing, metrics validation | Backend or distributed systems | Missing logs, coverage <90% critical paths |
+| **Research Agent** | Monitors new patterns or libraries | Fast-moving stacks (AI/ML) | Updates <1 month old |
+| **DevEx Agent** | DX productivity and tooling | Any team-scale repo | PR cycle >24h |
+
+### Extended Optional Agents
+
+<details>
+<summary>Click to see all optional agents</summary>
+
+- **UX/Accessibility Agent** - UI/UX flow, WCAG 2.1 AA compliance (frontend repos)
+- **Error Handling Agent** - Robustness and failure tolerance (production codebases)
+- **Dependency Agent** - Package hygiene and version stability (JS, Python, package managers)
+- **Build Agent** - CI/CD speed and determinism (CI/CD-intensive projects)
+- **Cost Agent** - Cloud cost optimization (cloud, serverless, ML projects)
+- **Knowledge Agent** - Context capture and internal wiki updates (fast iteration teams)
+- **Ethics/Compliance Agent** - Regulatory or ethical constraints (fintech, healthcare, research)
+- **Benchmark Agent** - Performance baselining & regression detection (high-performance systems)
+- **Security Red-Team Agent** - Ethical penetration and attack simulation (customer-facing apps)
+- **Human Oversight Agent** - Acts as a final arbiter (enterprise pipelines)
+
+</details>
 
 ---
 
@@ -70,18 +103,18 @@ A complete framework for implementing an 8-agent consensus system that ensures:
 
 ```
 ┌─────────────────────────────────┐
-│     ORCHESTRATOR (Claude)        │
-│         Opus 4.1 Model          │
+│   ORCHESTRATOR (Claude Opus)    │
+│    Coordinates all agents        │
 └────────────┬────────────────────┘
              │
     ┌────────▼────────┐
-    │  8 AGENT LAYER  │
-    │  Sonnet 4.5     │
+    │  AGENT LAYER    │
+    │  (Sonnet 4.5)   │
     └────────┬────────┘
              │
     ┌────────▼────────────────────────┐
-    │         Unanimous Consensus      │
-    │     All 8 Must Approve           │
+    │    Unanimous Consensus           │
+    │  (All active agents approve)     │
     └────────┬────────────────────────┘
              │
     ┌────────▼────────┐
@@ -90,115 +123,120 @@ A complete framework for implementing an 8-agent consensus system that ensures:
 ```
 
 ### Three-Tier Implementation
-
-1. **Skills Layer** - Reusable patterns and tools
-2. **Agent Layer** - Quality validation and standards
-3. **Execution Layer** - Actual implementation
+1. **Skills Layer** - Reusable patterns and tools (HOW)
+2. **Agent Layer** - Quality validation and standards (WHEN)
+3. **Execution Layer** - Core business logic (WHAT)
 
 ---
 
-## 📦 Installation
+## 📦 Installation & Plugin Setup
 
 ### Prerequisites
-
 - Python 3.8+
 - Git repository
-- 1GB free disk space
 - Claude Code CLI or API access
+- 1GB free disk space
 
-### Step-by-Step Installation
-
-#### 1. Copy Framework Files
-
-```bash
-# Copy the agentic_setup directory to your project root
-cp -r agentic_setup /your/project/
-cd /your/project
-```
-
-#### 2. Run Automated Installer
+### Step 1: Install Framework
 
 ```bash
 python agentic_setup/scripts/implement_framework.py .
 ```
 
-This will:
-- Create `.claude/` directory structure
-- Install all 8 agent configurations
-- Setup Git hooks for validation
-- Configure slash commands
-- Create helper scripts
+This automatically:
+- Scans your codebase to detect tech stack
+- Enables default agents (6 core agents)
+- Enables relevant optional agents
+- Creates `.claude/` directory structure
+- Configures Git hooks for validation
+- Sets up slash commands
+- Creates helper scripts
 
-#### 3. Verify Installation
+### Step 2: Install Compound Engineering Agents
 
-```bash
-# Test all agents are working
-python .claude/scripts/test_system.py
-
-# Check consensus system
-python .claude/scripts/consensus_report.py
-```
-
-#### 4. Configure Claude
-
-Copy the master prompt to Claude:
+Compound Engineering provides specialized Claude Code agents that integrate with this framework:
 
 ```bash
-cat agentic_setup/prompts/MASTER_CLAUDE_PROMPT.md
+# Available agents:
+# - kieran-rails-reviewer (Rails projects)
+# - kieran-typescript-reviewer (TypeScript/React projects)
+# - kieran-python-reviewer (Python projects)
+# - dhh-rails-reviewer (Rails with DHH's conventions)
+# - architecture-strategist
+# - performance-oracle
+# - security-sentinel
+# - data-integrity-guardian
+
+# These are already available in Claude Code's Task tool
+# Configuration is in your CLAUDE.md
 ```
 
-Paste this into Claude's system prompt or initial message.
+**To use Compound Engineering agents:**
+1. They're invoked via Claude Code's `Task` tool with `subagent_type` parameter
+2. They integrate automatically with your local agents
+3. Configure which ones to use in `.claude/config.py`
 
-#### 5. Setup GitHub Copilot (Optional)
+**Example configuration:**
 
-```bash
-# Copy Copilot config
-cp agentic_setup/templates/github_copilot_config.yml .github/copilot/config.yml
+```python
+# .claude/config.py
+COMPOUND_ENGINEERING_AGENTS = {
+    "enabled": True,
+    "agents": [
+        "kieran-python-reviewer",  # If Python project
+        "architecture-strategist",
+        "performance-oracle",
+        "security-sentinel"
+    ],
+    "auto_invoke": {
+        "kieran-python-reviewer": ["after_implementation"],
+        "security-sentinel": ["before_commit"]
+    }
+}
 ```
 
----
+### Step 3: Install Superpowers (Optional)
 
-## 👥 Agent Descriptions
+Superpowers are productivity-enhancing Claude Code extensions:
 
-### Data Agent
-- **Focus:** Data quality, pipelines, validation
-- **Standards:** >95% coverage, <1% violations
-- **Veto Triggers:** Data integrity issues, missing validation
+**What are Superpowers?**
+- Enhanced context management (smart compaction)
+- Intelligent code navigation
+- Advanced refactoring capabilities
+- Pattern recognition and suggestions
 
-### Math Agent
-- **Focus:** Calculations, formulas, statistics
-- **Standards:** 100% accuracy, safe operations
-- **Veto Triggers:** Math errors, divide-by-zero
+**Installation:**
 
-### Model Agent
-- **Focus:** ML training, validation, predictions
-- **Standards:** F1>0.60, Sharpe>2.0
-- **Veto Triggers:** Overfitting, poor performance
+Superpowers are installed via Claude Code settings:
 
-### Trading Agent
-- **Focus:** Business logic, strategies, signals
-- **Standards:** Win rate>65%, profit factor>2.0
-- **Veto Triggers:** Logic errors, incomplete features
+1. **Enable Superpowers Mode:**
+   ```bash
+   # Add to .claude/config.py
+   SUPERPOWERS_ENABLED = True
+   SUPERPOWERS_MODE = "enhanced"  # or "standard", "minimal"
+   ```
 
-### Review Agent
-- **Focus:** Code quality, security, testing
-- **Standards:** Coverage>80%, zero vulnerabilities
-- **Veto Triggers:** Security issues, low coverage
+2. **Configure Features:**
+   ```python
+   SUPERPOWERS_CONFIG = {
+       "smart_compaction": {
+           "enabled": True,
+           "threshold": 150000,  # Compact at 150K tokens
+           "preserve_priority": ["current_task", "agent_standards", "recent_vetoes"]
+       },
+       "intelligent_navigation": {
+           "enabled": True,
+           "auto_jump_to_relevant": True
+       },
+       "pattern_recognition": {
+           "enabled": True,
+           "learn_from_vetoes": True
+       }
+   }
+   ```
 
-### Infrastructure Agent
-- **Focus:** Deployment, AWS, monitoring
-- **Standards:** <$100/mo, >99.9% uptime
-- **Veto Triggers:** System failures, cost overruns
-
-### Documentation Agent
-- **Focus:** Docs, knowledge, tracking
-- **Standards:** 100% current, no placeholders
-- **Veto Triggers:** Missing docs, outdated info
-
-### Code Organization Agent
-- **Focus:** Structure, cleanliness, modularity
-- **Standards:** PR<500 lines, <5% duplication
-- **Veto Triggers:** Circular dependencies, bloat
+3. **Activate in Claude Prompt:**
+   The master prompt (automatically created) includes superpowers directives.
 
 ---
 
@@ -206,12 +244,13 @@ cp agentic_setup/templates/github_copilot_config.yml .github/copilot/config.yml
 
 ### Claude Commands
 
-After installation, use these slash commands in Claude:
+After installation, use these slash commands:
 
 ```
-/review          - Run full 8-agent review
+/review          - Run full agent review
 /consensus       - Get unanimous consensus
 /agent-status    - Show agent metrics
+/detect-agents   - Re-scan project and suggest agents
 ```
 
 ### Git Integration
@@ -223,8 +262,8 @@ The system automatically validates on commit:
 git add .
 git commit -m "Your message"
 
-# If validation fails, you'll see:
-❌ Commit blocked by: review-agent, code-organization-agent
+# If validation fails:
+❌ Commit blocked by: security-agent, test-agent
 
 # Fix issues and retry
 # Or bypass (NOT RECOMMENDED):
@@ -248,38 +287,10 @@ python .claude/scripts/agent_metrics.py
 
 ## 🛠️ Customization
 
-### Modify Agent Standards
-
-Edit agent skill files:
-
-```bash
-# Edit standards for an agent
-vim .claude/skills/review-agent/SKILL.md
-```
-
-### Add Custom Validation
-
-Update validation scripts:
+### Adjust Agent Sensitivity
 
 ```python
-# .claude/skills/data-agent/validate.py
-
-def check_standards(self, repo_path: Path):
-    """Add your custom checks here."""
-    # Check for data quality
-    if not self.validate_data_coverage():
-        self.errors.append("Data coverage below 95%")
-
-    # Check for validation
-    if not self.has_data_validation():
-        self.errors.append("Missing data validation")
-```
-
-### Adjust Sensitivity
-
-Configure in `.claude/config.py`:
-
-```python
+# .claude/config.py
 AGENT_CONFIG = {
     "quality_standards": {
         "test_coverage_minimum": 80,  # Adjust this
@@ -289,105 +300,30 @@ AGENT_CONFIG = {
 }
 ```
 
-### Add New Agents
+### Enable/Disable Agents
+
+```bash
+# Edit agent list
+vim .claude/config.py
+
+# Add agent to AGENTS list
+AGENTS.append("performance-agent")
+
+# Or disable an agent
+AGENTS.remove("doc-agent")
+```
+
+### Add Custom Agents
 
 ```bash
 # Create new agent structure
-mkdir -p .claude/skills/new-agent/{PATTERNS,CHECKLISTS,VALIDATION,SCRIPTS}
+mkdir -p .claude/skills/custom-agent/{PATTERNS,CHECKLISTS,VALIDATION,SCRIPTS}
 
 # Create SKILL.md
-cat > .claude/skills/new-agent/SKILL.md << EOF
----
-name: New Agent
-description: Your new agent description
----
-# Agent content here
-EOF
+vim .claude/skills/custom-agent/SKILL.md
 
 # Update config
-echo 'AGENTS.append("new-agent")' >> .claude/config.py
-```
-
----
-
-## 🔧 Troubleshooting
-
-### Common Issues
-
-#### Agents Always Veto
-
-```bash
-# Check what's triggering vetoes
-python .claude/scripts/consensus_report.py
-
-# Review agent metrics
-python .claude/scripts/agent_metrics.py
-
-# Adjust standards if too strict
-vim .claude/skills/[agent-name]/SKILL.md
-```
-
-#### Git Hook Not Running
-
-```bash
-# Ensure hook is executable
-chmod +x .git/hooks/pre-commit
-
-# Test manually
-./.git/hooks/pre-commit
-```
-
-#### Claude Not Recognizing Commands
-
-```bash
-# Verify command files exist
-ls -la .claude/commands/
-
-# Re-initialize Claude with prompt
-cat agentic_setup/prompts/MASTER_CLAUDE_PROMPT.md
-```
-
-### Debug Mode
-
-```bash
-# Enable verbose output
-export AGENT_DEBUG=1
-
-# Run with debug
-python .claude/scripts/consensus_report.py
-```
-
----
-
-## 📁 Directory Structure
-
-```
-agentic_setup/
-├── README.md                     # This file
-├── COMPLETE_SETUP_GUIDE.md       # Detailed documentation
-├── prompts/
-│   └── MASTER_CLAUDE_PROMPT.md   # Claude initialization
-├── templates/
-│   └── github_copilot_config.yml # Copilot configuration
-├── scripts/
-│   └── implement_framework.py    # Automated installer
-└── documentation/
-    └── EVOLUTION_GUIDE.md        # How to evolve the system
-```
-
-After installation:
-```
-your-project/
-├── .claude/
-│   ├── agents/            # Agent configurations
-│   ├── skills/            # Agent skills (8 subdirs)
-│   ├── commands/          # Slash commands
-│   ├── scripts/           # Helper scripts
-│   └── metrics/           # Performance tracking
-├── .git/hooks/
-│   ├── pre-commit         # Validation hook
-│   └── post-commit        # Metrics hook
-└── CLAUDE.md              # Main configuration
+echo 'AGENTS.append("custom-agent")' >> .claude/config.py
 ```
 
 ---
@@ -400,7 +336,6 @@ The system tracks:
 - Resolution times
 - Code quality trends
 
-View metrics:
 ```bash
 python .claude/scripts/agent_metrics.py
 ```
@@ -409,11 +344,31 @@ python .claude/scripts/agent_metrics.py
 
 ## 🚦 Best Practices
 
-1. **Start Small** - Begin with 2-3 agents, add more gradually
-2. **Tune Standards** - Adjust based on your team's needs
-3. **Document Vetoes** - Learn from patterns
-4. **Regular Reviews** - Check metrics weekly
-5. **Iterate** - Continuously improve agent logic
+1. **Start Small** - Begin with 6 default agents
+2. **Let Auto-Detection Work** - Trust the scanner
+3. **Tune Standards** - Adjust based on your team
+4. **Document Vetoes** - Learn from patterns
+5. **Regular Reviews** - Check metrics weekly
+6. **Iterate** - Continuously improve
+
+---
+
+## 📁 Directory Structure After Installation
+
+```
+your-project/
+├── .claude/
+│   ├── agents/              # Agent configurations
+│   ├── skills/              # Agent skills (auto-generated)
+│   ├── commands/            # Slash commands
+│   ├── scripts/             # Helper scripts
+│   ├── metrics/             # Performance tracking
+│   └── config.py            # Main configuration
+├── .git/hooks/
+│   ├── pre-commit           # Validation hook
+│   └── post-commit          # Metrics hook
+└── CLAUDE.md                # Main configuration doc
+```
 
 ---
 
@@ -421,7 +376,8 @@ python .claude/scripts/agent_metrics.py
 
 - **Documentation:** See `COMPLETE_SETUP_GUIDE.md`
 - **Agent Details:** Check `.claude/skills/*/SKILL.md`
-- **Examples:** Look in `templates/` directory
+- **Templates:** Look in `templates/` directory
+- **Troubleshooting:** See troubleshooting section in guide
 
 ---
 
@@ -431,7 +387,6 @@ This framework is open source and available for use in any project.
 
 ---
 
-**Created by:** Multi-Agent Consensus System
-**Maintained by:** Code Organization Agent
-**Version:** 2.0
+**Created by:** Universal Agent Detection System
+**Version:** 3.0
 **Last Updated:** November 6, 2025

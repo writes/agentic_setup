@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Complete implementation script for Multi-Agent Consensus Framework.
-This script sets up the entire agentic system in a repository.
+Universal Multi-Agent Framework Installer
+Auto-detects codebase and installs appropriate agents.
 """
 
 import os
@@ -13,32 +13,42 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional
 
-class MultiAgentFrameworkInstaller:
-    """Install and configure the complete multi-agent system."""
+# Import agent detector
+sys.path.insert(0, str(Path(__file__).parent))
+from agent_detector import AgentDetector
 
-    AGENTS = [
+class MultiAgentFrameworkInstaller:
+    """Install and configure the universal multi-agent system."""
+
+    # Default agents (always enabled)
+    DEFAULT_AGENTS = [
         "data-agent",
-        "math-agent",
-        "model-agent",
-        "trading-agent",
-        "review-agent",
-        "infrastructure-agent",
-        "documentation-agent",
-        "code-organization-agent"
+        "logic-agent",
+        "test-agent",
+        "security-agent",
+        "infra-agent",
+        "doc-agent"
     ]
+
+    # Will be populated by agent detection
+    AGENTS = []
 
     def __init__(self, repo_path: str = "."):
         """Initialize installer with target repository path."""
         self.repo_path = Path(repo_path).resolve()
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.detector = AgentDetector(str(self.repo_path))
+        self.enabled_agents = []
+        self.agent_reasons = {}
 
     def run(self):
         """Execute complete installation process."""
-        print("🚀 Multi-Agent Consensus Framework Installer")
+        print("🚀 Universal Multi-Agent Framework Installer")
         print("=" * 50)
 
         steps = [
             ("Checking prerequisites", self.check_prerequisites),
+            ("Detecting codebase and required agents", self.detect_agents),
             ("Creating directory structure", self.create_directory_structure),
             ("Installing agent configurations", self.install_agents),
             ("Setting up validation scripts", self.create_validation_scripts),
@@ -91,6 +101,25 @@ class MultiAgentFrameworkInstaller:
         if free_gb < 1:
             raise RuntimeError(f"Insufficient disk space: {free_gb:.1f}GB free")
 
+    def detect_agents(self):
+        """Detect which agents should be enabled for this codebase."""
+        self.enabled_agents, self.agent_reasons = self.detector.detect()
+        self.AGENTS = self.enabled_agents
+
+        # Generate and display report
+        report = self.detector.generate_report(self.enabled_agents, self.agent_reasons)
+        print("\n" + report)
+
+        # Ask user confirmation
+        print("\n❓ Proceed with these agents? (y/n): ", end="")
+        response = input().strip().lower()
+
+        if response != 'y':
+            print("\n   You can manually edit .claude/config.py after installation")
+            print("   Proceeding with default agents only for now...")
+            self.AGENTS = self.DEFAULT_AGENTS
+            self.enabled_agents = self.DEFAULT_AGENTS
+
     def create_directory_structure(self):
         """Create all required directories."""
         directories = [
@@ -135,164 +164,186 @@ class MultiAgentFrameworkInstaller:
     def create_agent_skill(self, agent: str):
         """Create SKILL.md for an agent."""
         agent_configs = {
+            # Default Agents (Always Enabled)
             "data-agent": {
                 "name": "Data Agent",
-                "description": "Data pipelines, validation, quality assurance",
+                "description": "Validates inputs, file formats, and API schemas",
                 "responsibilities": [
-                    "Data pipeline management",
-                    "Quality validation (>95% coverage)",
-                    "ETL processes",
+                    "Input data validation",
+                    "File format verification (.csv, .json, .xml)",
+                    "API schema compliance",
                     "Data integrity checks"
                 ],
                 "standards": {
-                    "Coverage": ">95%",
-                    "Violations": "<1%",
-                    "Throughput": ">20M rows/hr"
+                    "Validation Coverage": ">95%",
+                    "Data Integrity": "No corrupt data",
+                    "Schema Compliance": "100%"
                 },
                 "veto_triggers": [
-                    "Data integrity violations",
-                    "Missing validation",
-                    "Pipeline failures"
+                    "Corrupt or invalid input data",
+                    "Missing required validation",
+                    "Schema violations"
                 ]
             },
-            "math-agent": {
-                "name": "Math Agent",
-                "description": "Mathematical calculations, formulas, statistical validation",
+            "logic-agent": {
+                "name": "Logic Agent",
+                "description": "Ensures core logic correctness and control flow",
                 "responsibilities": [
-                    "Formula accuracy",
-                    "Safe mathematical operations",
-                    "Statistical validation",
-                    "Numerical stability"
+                    "Business logic validation",
+                    "Control flow correctness",
+                    "State management verification",
+                    "Edge case handling"
                 ],
                 "standards": {
-                    "Accuracy": "100%",
-                    "Safety": "No divide-by-zero",
-                    "Precision": "IEEE 754 compliant"
+                    "Logic Coverage": ">90%",
+                    "Test Pass Rate": "100%",
+                    "Edge Cases": "All handled"
                 },
                 "veto_triggers": [
-                    "Mathematical errors",
-                    "Unsafe operations",
-                    "Incorrect formulas"
+                    "Failing tests",
+                    "Invalid logic paths",
+                    "Unhandled edge cases"
                 ]
             },
-            "model-agent": {
-                "name": "Model Agent",
-                "description": "ML models, training, validation, predictions",
+            "test-agent": {
+                "name": "Test Agent",
+                "description": "Enforces test coverage and regression control",
                 "responsibilities": [
-                    "Model training and validation",
-                    "Hyperparameter optimization",
-                    "Performance monitoring",
-                    "Overfitting prevention"
-                ],
-                "standards": {
-                    "F1 Score": ">0.60",
-                    "Train/Test Gap": "<15%",
-                    "Sharpe Ratio": ">2.0"
-                },
-                "veto_triggers": [
-                    "Performance below threshold",
-                    "Overfitting detected",
-                    "Data leakage"
-                ]
-            },
-            "trading-agent": {
-                "name": "Trading Agent",
-                "description": "Business logic, strategies, signals, execution",
-                "responsibilities": [
-                    "Strategy implementation",
-                    "Signal generation",
-                    "Risk management",
-                    "Order execution"
-                ],
-                "standards": {
-                    "Win Rate": ">65%",
-                    "Profit Factor": ">2.0",
-                    "Max Drawdown": "<5%"
-                },
-                "veto_triggers": [
-                    "Strategy logic errors",
-                    "Risk limit violations",
-                    "Incomplete features"
-                ]
-            },
-            "review-agent": {
-                "name": "Review Agent",
-                "description": "Code quality, security, testing, best practices",
-                "responsibilities": [
-                    "Code quality enforcement",
-                    "Security vulnerability detection",
-                    "Test coverage validation",
-                    "Performance optimization"
+                    "Test coverage enforcement",
+                    "Regression prevention",
+                    "Test quality validation",
+                    "CI/CD integration"
                 ],
                 "standards": {
                     "Test Coverage": ">80%",
-                    "Security Issues": "0 critical",
-                    "Code Complexity": "<10"
+                    "Test Quality": "Meaningful assertions",
+                    "Execution Time": "<5min"
                 },
                 "veto_triggers": [
-                    "Security vulnerabilities",
-                    "Low test coverage",
-                    "High complexity"
+                    "Coverage below 80%",
+                    "Missing critical test cases",
+                    "Flaky tests"
                 ]
             },
-            "infrastructure-agent": {
+            "security-agent": {
+                "name": "Security Agent",
+                "description": "Scans for secrets, injections, and vulnerable dependencies",
+                "responsibilities": [
+                    "Secret scanning",
+                    "Injection attack prevention",
+                    "Dependency vulnerability checking",
+                    "Security best practices"
+                ],
+                "standards": {
+                    "Critical CVEs": "0",
+                    "Secrets Exposed": "0",
+                    "OWASP Top 10": "No violations"
+                },
+                "veto_triggers": [
+                    "Found hardcoded secrets",
+                    "High/critical CVE in dependencies",
+                    "Injection vulnerabilities"
+                ]
+            },
+            "infra-agent": {
                 "name": "Infrastructure Agent",
-                "description": "Deployment, AWS, monitoring, performance",
+                "description": "Checks build, containers, and CI/CD safety",
                 "responsibilities": [
-                    "System deployment",
-                    "AWS resource management",
-                    "Performance monitoring",
-                    "Cost optimization"
+                    "Build configuration validation",
+                    "Container security",
+                    "CI/CD pipeline safety",
+                    "Deployment readiness"
                 ],
                 "standards": {
-                    "Cost": "<$100/month",
-                    "Uptime": ">99.9%",
-                    "Response Time": "<100ms"
+                    "Build Success": "100%",
+                    "Container Security": "No critical issues",
+                    "Deployment Safety": "Validated"
                 },
                 "veto_triggers": [
-                    "System failures",
-                    "Cost overruns",
-                    "Performance issues"
+                    "Unsafe permissions",
+                    "Insecure container config",
+                    "Build failures"
                 ]
             },
-            "documentation-agent": {
+            "doc-agent": {
                 "name": "Documentation Agent",
-                "description": "Documentation, knowledge, monitoring, tracking",
+                "description": "Verifies docs and README sync with code",
                 "responsibilities": [
-                    "Documentation maintenance",
-                    "Knowledge codification",
-                    "Change tracking",
-                    "Metric monitoring"
+                    "Documentation completeness",
+                    "Code-docs synchronization",
+                    "README maintenance",
+                    "API documentation"
                 ],
                 "standards": {
-                    "Coverage": "100%",
-                    "Currency": "Always current",
+                    "Coverage": "100% of public APIs",
+                    "Currency": "Updated with code",
                     "Completeness": "No placeholders"
                 },
                 "veto_triggers": [
-                    "Missing documentation",
-                    "Outdated information",
+                    "Missing documentation for new features",
+                    "Outdated documentation",
                     "Broken references"
                 ]
             },
-            "code-organization-agent": {
-                "name": "Code Organization Agent",
-                "description": "Repository structure, cleanliness, minimal changes",
+            # Optional Agents (Auto-Enabled Based on Detection)
+            "performance-agent": {
+                "name": "Performance Agent",
+                "description": "Runtime efficiency, profiling, algorithmic complexity",
                 "responsibilities": [
-                    "Repository organization",
-                    "Code consolidation",
-                    "Duplication removal",
-                    "Standards enforcement"
+                    "Performance benchmarking",
+                    "Algorithmic complexity analysis",
+                    "Resource usage monitoring",
+                    "Optimization recommendations"
                 ],
                 "standards": {
-                    "PR Size": "<500 lines",
-                    "Duplication": "<5%",
-                    "Dependencies": "No circular"
+                    "CPU Usage": "<80%",
+                    "Memory Usage": "<75%",
+                    "Request Latency": "<300ms"
                 },
                 "veto_triggers": [
-                    "Structural violations",
-                    "Excessive duplication",
-                    "Oversized changes"
+                    "Performance regression >10%",
+                    "Memory leaks",
+                    "CPU/memory limits exceeded"
+                ]
+            },
+            "refactor-agent": {
+                "name": "Refactor Agent",
+                "description": "Code structure and maintainability",
+                "responsibilities": [
+                    "Code structure improvement",
+                    "Duplication elimination",
+                    "Complexity reduction",
+                    "Maintainability enhancement"
+                ],
+                "standards": {
+                    "Maintainability Index": ">85",
+                    "Code Duplication": "<5%",
+                    "Complexity": "<10"
+                },
+                "veto_triggers": [
+                    "Maintainability index <85",
+                    "High duplication",
+                    "Excessive complexity"
+                ]
+            },
+            "observability-agent": {
+                "name": "Observability Agent",
+                "description": "Logging, tracing, and metrics validation",
+                "responsibilities": [
+                    "Logging coverage",
+                    "Distributed tracing",
+                    "Metrics instrumentation",
+                    "Event schema validation"
+                ],
+                "standards": {
+                    "Critical Path Coverage": ">90%",
+                    "Log Consistency": "100%",
+                    "Metrics Coverage": "All endpoints"
+                },
+                "veto_triggers": [
+                    "Missing logs on critical paths",
+                    "Inconsistent event schemas",
+                    "No metrics on new endpoints"
                 ]
             }
         }
@@ -506,7 +557,7 @@ FAILED_AGENTS=()
 WARNING_AGENTS=()
 
 # Run each agent validation
-for agent in data math model trading review infrastructure documentation code-organization; do
+for agent in {' '.join([a.replace('-agent', '') for a in self.AGENTS])}; do
     echo -n "Checking ${agent}-agent... "
 
     # Run validation script
