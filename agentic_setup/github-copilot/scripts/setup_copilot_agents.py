@@ -128,13 +128,13 @@ agents:
                     "Mock external dependencies"
                 ]
             },
-            "Performance Agent": {
-                "paths": ["**/api/**", "**/routes/**", "**/handlers/**"],
+            "Doc Agent": {
+                "paths": ["**/*"],
                 "standards": [
-                    "Optimize database queries",
-                    "Use async where possible",
-                    "Add caching for expensive operations",
-                    "Monitor response times"
+                    "Keep documentation in sync with code",
+                    "Add docstrings to functions",
+                    "Update README for new features",
+                    "Document API changes"
                 ]
             },
             "Data Agent": {
@@ -144,6 +144,141 @@ agents:
                     "Use type hints",
                     "Add migration reversibility",
                     "Handle data integrity"
+                ]
+            },
+            "Infrastructure Agent": {
+                "paths": ["**/infrastructure/**", "**/*.dockerfile", "**/deploy/**"],
+                "standards": [
+                    "Use infrastructure as code",
+                    "Include health checks",
+                    "Implement graceful shutdown",
+                    "Add resource limits"
+                ]
+            },
+            "Performance Agent": {
+                "paths": ["**/api/**", "**/routes/**", "**/handlers/**"],
+                "standards": [
+                    "Optimize database queries",
+                    "Use async where possible",
+                    "Add caching for expensive operations",
+                    "Monitor response times"
+                ]
+            },
+            "Refactor Agent": {
+                "paths": ["**/*.py", "**/*.js", "**/*.ts"],
+                "standards": [
+                    "Eliminate code duplication",
+                    "Extract reusable functions",
+                    "Simplify complex logic",
+                    "Improve naming clarity"
+                ]
+            },
+            "Observability Agent": {
+                "paths": ["**/*"],
+                "standards": [
+                    "Add structured logging",
+                    "Include tracing spans",
+                    "Export metrics",
+                    "Add health endpoints"
+                ]
+            },
+            "Research Agent": {
+                "paths": ["**/*"],
+                "standards": [
+                    "Check for latest API versions",
+                    "Validate deprecated features",
+                    "Follow framework best practices",
+                    "Use current patterns"
+                ]
+            },
+            "DevEx Agent": {
+                "paths": ["**/*"],
+                "standards": [
+                    "Add helpful code comments",
+                    "Include setup instructions",
+                    "Provide example usage",
+                    "Document common pitfalls"
+                ]
+            },
+            "UX/Accessibility Agent": {
+                "paths": ["**/components/**", "**/ui/**", "**/*.jsx", "**/*.tsx"],
+                "standards": [
+                    "Include ARIA labels",
+                    "Support keyboard navigation",
+                    "Test color contrast",
+                    "Add responsive design"
+                ]
+            },
+            "Error Handling Agent": {
+                "paths": ["**/*"],
+                "standards": [
+                    "Handle all exceptions",
+                    "Provide useful error messages",
+                    "Log errors with context",
+                    "Include recovery paths"
+                ]
+            },
+            "Dependency Agent": {
+                "paths": ["package.json", "requirements.txt", "go.mod", "Cargo.toml"],
+                "standards": [
+                    "Pin dependency versions",
+                    "Check for security vulnerabilities",
+                    "Remove unused dependencies",
+                    "Document dependency purposes"
+                ]
+            },
+            "Build Agent": {
+                "paths": [".github/**", ".gitlab-ci.yml", "Jenkinsfile"],
+                "standards": [
+                    "Cache build dependencies",
+                    "Run tests in CI",
+                    "Check code quality",
+                    "Deploy automatically"
+                ]
+            },
+            "Cost Optimization Agent": {
+                "paths": ["**/cloud/**", "**/lambda/**", "serverless.yml"],
+                "standards": [
+                    "Optimize resource allocation",
+                    "Use cost-effective services",
+                    "Implement auto-scaling",
+                    "Monitor spending"
+                ]
+            },
+            "Knowledge Agent": {
+                "paths": ["docs/**", "wiki/**", "**/*.md"],
+                "standards": [
+                    "Keep docs up to date",
+                    "Add architecture diagrams",
+                    "Document decisions",
+                    "Maintain changelog"
+                ]
+            },
+            "Ethics & Compliance Agent": {
+                "paths": ["**/*"],
+                "standards": [
+                    "Follow data privacy regulations",
+                    "Implement consent management",
+                    "Audit data access",
+                    "Document compliance"
+                ]
+            },
+            "Benchmark Agent": {
+                "paths": ["**/benchmark/**", "**/perf/**"],
+                "standards": [
+                    "Add performance benchmarks",
+                    "Track performance trends",
+                    "Test at scale",
+                    "Profile critical paths"
+                ]
+            },
+            "Security Red Team Agent": {
+                "paths": ["**/api/**", "**/routes/**", "**/public/**"],
+                "standards": [
+                    "Test for vulnerabilities",
+                    "Validate authentication",
+                    "Check authorization",
+                    "Test input fuzzing"
                 ]
             }
         }
@@ -214,13 +349,31 @@ Enabled Agents:
 - Core: {core_agents}
 - Optional: {optional_agents or 'None'}
 
-Each agent is an expert reviewer:
+Each agent is an expert reviewer with specific responsibilities:
+
+Core Agents (Always Active):
 - Security Agent: Prevents vulnerabilities, secrets, injection attacks
-- Logic Agent: Ensures correctness, handles edge cases
-- Test Agent: Enforces testing and >80% coverage
-- Performance Agent: Optimizes algorithms, queries, response times
-- Data Agent: Validates data integrity and schemas
+- Logic Agent: Ensures correctness, handles edge cases, validates business logic
+- Test Agent: Enforces testing standards and >80% coverage
 - Doc Agent: Maintains documentation sync with code
+- Data Agent: Validates data integrity, schemas, and migrations
+- Infrastructure Agent: Reviews deployment, containers, and infrastructure code
+
+Optional Agents (Auto-Enabled):
+- Performance Agent: Optimizes algorithms, queries, response times, caching
+- Refactor Agent: Eliminates duplication, improves code clarity
+- Observability Agent: Adds logging, tracing, metrics, monitoring
+- Research Agent: Validates latest APIs, checks for deprecated features
+- DevEx Agent: Improves developer experience, documentation, setup
+- UX/Accessibility Agent: Ensures accessibility, responsive design, ARIA labels
+- Error Handling Agent: Comprehensive exception handling, recovery paths
+- Dependency Agent: Manages dependencies, versions, security updates
+- Build Agent: Optimizes CI/CD, caching, deployment automation
+- Cost Optimization Agent: Reduces cloud costs, optimizes resource usage
+- Knowledge Agent: Maintains architecture docs, decisions, changelog
+- Ethics & Compliance Agent: GDPR, HIPAA, privacy, data protection
+- Benchmark Agent: Performance testing, profiling, optimization
+- Security Red Team Agent: Penetration testing, vulnerability scanning
 
 Review all code suggestions through these agents before presenting them to the user.
 Only suggest code that passes all agent checks.

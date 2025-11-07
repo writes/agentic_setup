@@ -364,6 +364,35 @@ applyTo: "**/migrations/**,**/models/**,**/schemas/**,**/db/**"
 - Validates performance requirements
 - Documents test scenarios
 
+## Quality Control Agents
+
+These agents review every code suggestion before it's presented to the user.
+All agents must approve for code to be suggested.
+
+### Core Agents (Always Active)
+- **Security Agent**: Prevents vulnerabilities, secrets, SQL injection, XSS
+- **Logic Agent**: Ensures correctness, edge cases, error handling
+- **Test Agent**: Enforces >80% coverage, integration tests
+- **Doc Agent**: Keeps documentation synchronized with code
+- **Data Agent**: Validates schemas, migrations, data integrity
+- **Infrastructure Agent**: Reviews containers, deployment, infrastructure as code
+
+### Optional Agents (Auto-Enabled Based on Project)
+- **Performance Agent**: Optimizes queries, caching, async operations
+- **Refactor Agent**: Eliminates duplication, simplifies complexity
+- **Observability Agent**: Adds logging, tracing, metrics
+- **Research Agent**: Validates latest APIs, checks deprecated features
+- **DevEx Agent**: Improves developer experience and documentation
+- **UX/Accessibility Agent**: ARIA labels, keyboard navigation, contrast
+- **Error Handling Agent**: Comprehensive exception handling
+- **Dependency Agent**: Manages versions, security vulnerabilities
+- **Build Agent**: Optimizes CI/CD, caching, deployments
+- **Cost Optimization Agent**: Reduces cloud spend, resource optimization
+- **Knowledge Agent**: Architecture docs, ADRs, changelog
+- **Ethics & Compliance Agent**: GDPR, HIPAA, privacy regulations
+- **Benchmark Agent**: Performance testing and profiling
+- **Security Red Team Agent**: Penetration testing, vulnerability scanning
+
 ## Guardrails
 
 ### Security
