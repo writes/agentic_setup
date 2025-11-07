@@ -116,15 +116,16 @@ python ~/agentic-setup/agentic_setup/github-copilot/scripts/setup_copilot_agents
 | Feature | Claude Code | GitHub Copilot |
 |---------|-------------|----------------|
 | **Platform** | CLI / Terminal | VS Code |
-| **Agents** | 6 default + 15 optional | Core 4 + specialized |
+| **Agents** | 6 default + 15 optional | 6 core + 15 optional (21 total!) |
 | **Auto-Detection** | ✅ Full stack analysis | ✅ Full stack analysis |
 | **Git Integration** | ✅ Pre-commit hooks | ⚠️ Manual review |
 | **Real-time Suggestions** | ❌ On-demand | ✅ Inline autocomplete |
-| **Deep Analysis** | ✅ Comprehensive | ⚠️ Focused |
+| **Deep Analysis** | ✅ Comprehensive | ✅ Comprehensive |
 | **Documentation** | ✅ Auto-generated | ✅ Context-aware |
 | **Learning Curve** | Moderate | Low |
 | **Cost** | Free + API costs | Subscription required |
 | **Best For** | CLI developers, deep reviews | VS Code users, fast coding |
+| **Agent Timing** | Reactive (commit-time) | Proactive (as-you-type) |
 
 ---
 

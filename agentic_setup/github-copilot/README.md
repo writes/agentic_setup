@@ -14,14 +14,16 @@ By combining Copilot's powerful code generation with a multi-agent framework (in
 
 ## 🎯 What This Does
 
-Transforms GitHub Copilot from a simple autocomplete tool into an intelligent, multi-agent system that:
+Transforms GitHub Copilot from a simple autocomplete tool into an intelligent, **21-agent system** that:
 
+- ✅ **21 specialized agents** (6 core + 15 optional) - matches Claude Code's comprehensive system
 - ✅ **Auto-detects** your project's stack and patterns
-- ✅ **Activates specialized agents** based on your codebase
-- ✅ **Enforces quality standards** in real-time
+- ✅ **Activates agents dynamically** based on your codebase characteristics
+- ✅ **Enforces quality standards** in real-time as you type
 - ✅ **Integrates documentation** and architecture knowledge
-- ✅ **Provides consensus-based** code suggestions
-- ✅ **Maintains awareness** of your project context
+- ✅ **Provides consensus-based** code suggestions (all agents must approve)
+- ✅ **Proactive guidance** - agents guide suggestions before you even commit
+- ✅ **Specialized expertise** - cost optimization, compliance, performance, security, and more
 
 ---
 
